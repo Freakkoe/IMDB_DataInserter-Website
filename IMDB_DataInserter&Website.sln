@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMDB_DataInserterV1", "IMDB_DataInserter&Website\IMDB_DataInserterV1.csproj", "{5BE7FC4F-F3BD-4C63-9E80-3D11E1128798}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMDB_Website", "IMDB_Website\IMDB_Website.csproj", "{898E8D25-C2BC-4435-8508-9B241F91F574}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMDB_DataInserter", "IMDB_DataInserter\IMDB_DataInserter.csproj", "{4E91396A-AC0E-4387-941A-D456E31E264F}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BE7FC4F-F3BD-4C63-9E80-3D11E1128798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BE7FC4F-F3BD-4C63-9E80-3D11E1128798}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BE7FC4F-F3BD-4C63-9E80-3D11E1128798}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BE7FC4F-F3BD-4C63-9E80-3D11E1128798}.Release|Any CPU.Build.0 = Release|Any CPU
 		{898E8D25-C2BC-4435-8508-9B241F91F574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{898E8D25-C2BC-4435-8508-9B241F91F574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{898E8D25-C2BC-4435-8508-9B241F91F574}.Release|Any CPU.ActiveCfg = Release|Any CPU
