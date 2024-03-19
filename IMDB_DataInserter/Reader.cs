@@ -11,8 +11,8 @@ namespace IMDB_DataInserter
     public static class Reader
     {
         // Path to the data directory (where the IMDB files is located (tsv FILES))
-        // In this case ive put them inside the solution folder - in a folder called "Data"
-        private static readonly string path = @"..\..\..\..\Data\";
+        // In this case ive put them inside my Source Repos folder where all my solutions are - in a folder called "Data"
+        private static readonly string path = @"..\..\..\Data\";
 
         // Method to read titles from the file and parse them into a list of Title objects
         public static List<Title> GetTitles()
