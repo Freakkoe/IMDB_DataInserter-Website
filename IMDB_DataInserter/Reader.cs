@@ -10,7 +10,7 @@ namespace IMDB_DataInserter
 {
     public static class Reader
     {
-        private static readonly string path = @"..\..\..\..\Data\"; // New Test
+        private static readonly string path = @"..\..\..\..\Data\"; // New Test V2
         public static List<Title> GetTitles()
         {
             var list = new List<Title>();
