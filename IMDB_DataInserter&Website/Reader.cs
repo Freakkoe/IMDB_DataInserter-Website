@@ -40,6 +40,7 @@ namespace IMDB_DataInserter
             return list;
         }
 
+        // TRYING AGAIN
         private static int? CheckInt(string value)
         {
             bool canParse = int.TryParse(value, out int parsed);
