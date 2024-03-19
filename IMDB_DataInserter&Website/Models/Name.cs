@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMDB_DataInserter_Website.Models
+namespace IMDB_DataInserter.Models
 {
     public class Name
     {
