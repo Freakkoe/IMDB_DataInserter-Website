@@ -13,4 +13,5 @@ var titles = Reader.GetTitles();
 Console.WriteLine("Data is in memory!");
 Console.WriteLine("Bulk inserting titles...");
 Inserter.InsertTitles(sqlConn, titles);
+Console.WriteLine("Insert completed");
 GC.Collect();
