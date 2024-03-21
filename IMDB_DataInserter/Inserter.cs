@@ -67,7 +67,6 @@ namespace IMDB_DataInserter
                     }
                 }
             }
-
             // Bulk copying data into the database for Titles and Genres
             SqlBulkCopy bulkTitles = new(connection, SqlBulkCopyOptions.KeepNulls, null)
             {
@@ -84,6 +83,167 @@ namespace IMDB_DataInserter
                 BulkCopyTimeout = timeout
             };
             bulkGenres.WriteToServer(genreTable);
+
+            return;
+        }
+
+        // Method to insert names, associated known-for titles, and professions into the database
+        public static void InsertNames(SqlConnection connection, List<Name> names)
+        {
+            DataTable knownForTable = new("KnownForTitles");    // Creating DataTable for KnownForTitles
+            DataTable nameTable = new("Names");                 // Creating DataTable for Names
+            DataTable professionTable = new("Professions");     // Creating DataTable for Professions
+
+            // Defining columns for the Name DataTable
+            nameTable.Columns.Add("nconst", typeof(string));
+            nameTable.Columns.Add("primaryName", typeof(string));
+            nameTable.Columns.Add("birthYear", typeof(int));
+            nameTable.Columns.Add("deathYear", typeof(int));
+
+            // Defining columns for the KnownForTitles DataTable
+            knownForTable.Columns.Add("id", typeof(int));
+            knownForTable.Columns.Add("nconst", typeof(string));
+            knownForTable.Columns.Add("tconst", typeof(string));
+
+            // Defining columns for the Professions DataTable
+            professionTable.Columns.Add("id", typeof(int));
+            professionTable.Columns.Add("profession", typeof(string));
+            professionTable.Columns.Add("nconst", typeof(string));
+
+            // Cycles through each Name object and populating the DataTables
+            foreach (Name name in names)
+            {
+                DataRow nameRow = nameTable.NewRow();
+                // Populating Name DataTable
+                nameRow["nconst"] = name.nconst;
+                nameRow["primaryName"] = name.primaryName;
+                nameRow["birthYear"] = name.birthYear == null ? DBNull.Value : name.birthYear;
+                nameRow["deathYear"] = name.deathYear == null ? DBNull.Value : name.deathYear;
+
+                nameTable.Rows.Add(nameRow);
+                // Populating KnownForTitles DataTable
+                if (name.knownForTitles != null)
+                {
+                    foreach (var tconst in name.knownForTitles)
+                    {
+                        DataRow row = knownForTable.NewRow();
+                        row["id"] = DBNull.Value;
+                        row["nconst"] = name.nconst;
+                        row["tconst"] = tconst;
+
+                        knownForTable.Rows.Add(row);
+                    }
+                }
+
+                // Populating Professions DataTable
+                if (name.primaryProfessions != null)
+                {
+                    foreach (var profession in name.primaryProfessions)
+                    {
+                        DataRow row = professionTable.NewRow();
+                        row["id"] = DBNull.Value;
+                        row["profession"] = profession;
+                        row["nconst"] = name.nconst;
+
+
+                        professionTable.Rows.Add(row);
+                    }
+                }
+            }
+
+            // Bulk copying data into the database for Names, KnownForTitles, and Professions
+            SqlBulkCopy bulkNames = new(connection, SqlBulkCopyOptions.KeepNulls, null)
+            {
+                DestinationTableName = "Names",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+            bulkNames.WriteToServer(nameTable);
+
+            SqlBulkCopy bulkKnownFor = new(connection, SqlBulkCopyOptions.KeepNulls, null)
+            {
+                DestinationTableName = "KnownForTitles",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+            bulkKnownFor.WriteToServer(knownForTable);
+
+            SqlBulkCopy bulkProfessions = new(connection, SqlBulkCopyOptions.KeepNulls, null)
+            {
+                DestinationTableName = "Professions",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+            bulkProfessions.WriteToServer(professionTable);
+
+            return;
+        }
+
+        // Method to insert crew members, such as writers and directors, into the database
+        public static void InsertCrew(SqlConnection connection, List<Crew> crews)
+        {
+            DataTable writerTable = new("Writers");         // Creating DataTable for Writers
+            DataTable directorTable = new("Directors");     // Creating DataTable for Directors
+
+            // Defining columns for the Writer DataTable
+            writerTable.Columns.Add("id", typeof(int));
+            writerTable.Columns.Add("tconst", typeof(string));
+            writerTable.Columns.Add("nconst", typeof(string));
+
+            // Defining columns for the Director DataTable
+            directorTable.Columns.Add("id", typeof(int));
+            directorTable.Columns.Add("tconst", typeof(string));
+            directorTable.Columns.Add("nconst", typeof(string));
+
+            // Cycles through each Crew object and populating the DataTables
+            foreach (Crew c in crews)
+            {
+                // Populating Writer DataTable
+                if (c.wconst != null)
+                {
+                    foreach (var wconst in c.wconst)
+                    {
+                        DataRow row = writerTable.NewRow();
+                        row["id"] = DBNull.Value;
+                        row["tconst"] = c.tconst;
+                        row["nconst"] = wconst;
+
+                        writerTable.Rows.Add(row);
+                    }
+                }
+
+                // Populating Director DataTable
+                if (c.dconst != null)
+                {
+                    foreach (var dconst in c.dconst)
+                    {
+                        DataRow row = directorTable.NewRow();
+                        row["id"] = DBNull.Value;
+                        row["tconst"] = c.tconst;
+                        row["nconst"] = dconst;
+
+                        directorTable.Rows.Add(row);
+                    }
+                }
+            }
+
+            // Bulk copying data into the database for Writers
+            SqlBulkCopy bulkWriters = new(connection, SqlBulkCopyOptions.KeepNulls, null)
+            {
+                DestinationTableName = "Writers",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+            bulkWriters.WriteToServer(writerTable);
+
+            // Bulk copying data into the database for Directors
+            SqlBulkCopy bulkDirectors = new(connection, SqlBulkCopyOptions.KeepNulls, null)
+            {
+                DestinationTableName = "Directors",
+                BatchSize = batchSize,
+                BulkCopyTimeout = timeout
+            };
+            bulkDirectors.WriteToServer(directorTable);
 
             return;
         }

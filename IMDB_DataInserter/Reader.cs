@@ -48,6 +48,62 @@ namespace IMDB_DataInserter
 
             return list;
         }
+        // Method to read names from the file and parse them into a list of Name objects
+        public static List<Name> GetNames()
+        {
+            var list = new List<Name>();
+
+            // Reading lines from the name basics file, skipping the header, and taking only 20 lines for testing
+            foreach (string line in File.ReadLines(path + "name.basics.tsv")
+                                        .Skip(1).Take(20))
+            {
+                string[] values = line.Split('\t');
+
+                // Checking if the line has the expected number of fields
+                if (values.Length == 6)
+                {
+                    list.Add(new Name()
+                    {
+                        // Extracting data from each field and using it to create a new Name object
+                        nconst = values[0],
+                        primaryName = values[1],
+                        birthYear = CheckInt(values[2]),
+                        deathYear = CheckInt(values[3]),
+                        primaryProfessions = values[4] == @"\N" ? null : values[4].Split(","),
+                        knownForTitles = values[5] == @"\N" ? null : values[5].Split(",")
+                    });
+                }
+            }
+
+            return list;
+        }
+
+        // Method to read crew information from the file and parse them into a list of Crew objects
+        public static List<Crew> GetCrews()
+        {
+            var list = new List<Crew>();
+
+            // Reading lines from the title crew file, skipping the header, and taking only 20 lines for testing
+            foreach (string line in File.ReadLines(path + "title.crew.tsv")
+                                        .Skip(1).Take(20))
+            {
+                string[] values = line.Split('\t');
+
+                // Checking if the line has the expected number of fields
+                if (values.Length == 3)
+                {
+                    list.Add(new Crew()
+                    {
+                        // Extracting data from each field and using it to create a new Crew object
+                        tconst = values[0],
+                        dconst = values[1] == @"\N" ? null : values[1].Split(","),
+                        wconst = values[2] == @"\N" ? null : values[2].Split(",")
+                    });
+                }
+            }
+
+            return list;
+        }
 
         // Helper method to convert strings to nullable integers
         private static int? CheckInt(string value)
