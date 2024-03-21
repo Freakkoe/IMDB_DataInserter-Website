@@ -11,5 +11,7 @@ namespace IMDB_DataInserter.Models
         public string tconst { get; set; }
         public string[]? wconst { get; set; }
         public string[]? dconst { get; set; }
+
+        //DONE
     }
 }

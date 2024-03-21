@@ -22,5 +22,7 @@ namespace IMDB_DataInserter.Models
         {
             return $"tconst: {tconst},isAdult: {isAdult}, start: {startYear}, end: {endYear}, runtime: {runtimeMinutes}, gen: {genres?.Length}";
         }
+
+        //DONE
     }
 }

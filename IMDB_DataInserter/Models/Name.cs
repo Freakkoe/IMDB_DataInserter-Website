@@ -19,5 +19,7 @@ namespace IMDB_DataInserter.Models
         {
             return $"nconst: {nconst}, Name: {primaryName}, Birth: {birthYear}, Death {deathYear}, prof: {primaryProfessions?.Length}, titles: {knownForTitles?.Length}";
         }
+
+        //DONE
     }
 }
