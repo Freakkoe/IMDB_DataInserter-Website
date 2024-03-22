@@ -1,9 +1,17 @@
 ﻿using IMDB_Website.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IMDB_Website.Services
 {
     public class Service : Interface
     {
+
+        private readonly imdbContext context;
+
+        public Service(imdbContext service)
+        {
+            context = service;
+        }
         public Title FindTitleByTconst(string tconst)
         {
             throw new NotImplementedException();
