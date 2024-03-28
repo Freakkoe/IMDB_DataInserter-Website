@@ -1,0 +1,65 @@
+﻿@page
+@using IMDB_Website.Models
+@model IMDB_Website.Pages.NamesModel
+@{
+}
+
+<h1>Names</h1>
+
+<a asp-page="/AddName" class="btn btn-primary mb-2 my-2">Add a Name</a>
+
+<div class="row align-items-center">
+    <div class="col-auto">
+        <form class="form-check-inline">
+            <label for="amount" class="form-label mr-2">Number of names</label>
+            <input asp-for="Amount" type="number" class="form-control mr-2" id="amount"/>
+            <button type="submit" class="btn btn-primary my-2">Show</button>
+        </form>
+    </div>
+    <div class="col-auto">
+        <form class="form-inline">
+            <label for="criteria" class="form-label mr-2">Search string</label>
+            <input asp-for="Criteria" type="text" class="form-control mr-2" id="criteria">
+            <button type="submit" class="btn btn-primary my-2">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr class="text-center align-content-center">
+                <th scope="col">row #</th>
+                <th>nconst</th>
+                <th>Name</th>
+                <th>Birth Year</th>
+                <th>Death Year</th>
+                <th>Professions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = 1;
+
+                foreach (var name in Model.Names ?? new List<Name>())
+                {
+                    <tr class="text-center">
+                        <td scope="row">@i</td>
+                        <td>@name.Nconst</td>
+                        <td>@name.PrimaryName</td>
+                        <td>@name.BirthYear</td>
+                        <td>@name.DeathYear</td>
+                        <td>
+                            @{
+                                string professions = String.Join(", ", name.Professions.Select(p => p.Profession1.Replace('_', ' ')));
+                            }
+                            @professions
+                        </td>
+                    </tr>
+
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
