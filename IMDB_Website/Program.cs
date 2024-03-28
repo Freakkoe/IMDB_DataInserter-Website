@@ -1,7 +1,13 @@
+using imdb_app.Models;
+using IMDB_Website.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<imdbContext>();
+
+builder.Services.AddScoped<Interface, Service>();
 
 var app = builder.Build();
 

@@ -1,0 +1,86 @@
+﻿@page
+@using IMDB_Website.Models
+@model IMDB_Website.Pages.TitlesModel
+@{
+}
+
+<h1>Titles</h1>
+
+<a asp-page="/AddTitle" class="btn btn-primary my-2">Add a title</a>
+
+<div class="row align-items-center">
+    <div class="col-auto">
+        <form class="form-inline">
+            <label for="amount" class="form-label mr-2">Number of titles</label>
+            <input asp-for="Amount" type="number" class="form-control mr-2" id="amount">
+            <button type="submit" class="btn btn-primary my-2">Show</button>
+        </form>
+    </div>
+    <div class="col-auto">
+        <form class="form-inline">
+            <label for="criteria" class="form-label mr-2">Search string</label>
+            <input asp-for="Criteria" type="text" class="form-control mr-2" id="criteria">
+            <button type="submit" class="btn btn-primary my-2">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+
+    @if (Model.Titles?.Count() != 0)
+    {
+        <table class="table">
+            <thead class="text-center align-content-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th>tconst</th>
+                    <th>Title Type</th>
+                    <th>Primary Title</th>
+                    <th>Adult Content</th>
+                    <th>Start Year</th>
+                    <th>End Year</th>
+                    <th>Runtime (minutes)</th>
+                    <th>Genres</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var i = 1;
+
+
+                    foreach (var title in Model.Titles ?? new List<Title>())
+                    {
+                        <tr class="text-center">
+                            <td scope="row">@i</td>
+                            <td>@title.Tconst</td>
+                            <td>@title.TitleType</td>
+                            <td>@title.PrimaryTitle</td>
+                            <td>@title.IsAdult</td>
+                            <td>@title.StartYear</td>
+                            <td>@title.EndYear</td>
+                            <td>@title.RuntimeMinutes</td>
+                            <td>
+                                @{
+                                    string genres = String.Join(", ", title.Genres.Select(g => g.Genre1));
+                                }
+
+                                @genres
+                            </td>
+                            <td><a asp-page="/UpdateTitle" asp-route-tconst="@title.Tconst" class="btn btn-primary mx-2 my-2">Update</a></td>
+                            <td><a asp-page="/DeleteTitle" asp-route-tconst="@title.Tconst" class="btn btn-danger mx-2 my-2">Delete</a></td>
+                        </tr>
+
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There are no movies</p>
+    }
+
+</div>

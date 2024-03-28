@@ -1,0 +1,106 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "(LocalDB)\\MSSQLLocalDBContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "IMDB_Website",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Directors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Genres]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[KnownForTitles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Names]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Professions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Titles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Writers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Actors]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Non Adult]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[addName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[addTitle]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[deleteName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[deleteTitle]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[findName]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[findTitle]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[updateTitle]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": "IMDB.mdf",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
