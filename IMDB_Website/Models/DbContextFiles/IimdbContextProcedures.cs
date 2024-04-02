@@ -11,14 +11,28 @@ using System.Threading.Tasks;
 
 namespace imdb_app.Models
 {
+    // Partial interface defining stored procedures for imdbContext
     public partial interface IimdbContextProcedures
     {
+        // Asynchronously executes the stored procedure "addName" and returns the affected row count
         Task<int> addNameAsync(string primaryName, short? birthYear, short? deathYear, string profession, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "addTitle" and returns the affected row count
         Task<int> addTitleAsync(string titleType, string primaryTitle, string originalTitle, bool? isAdult, short? startYear, short? endYear, int? runtimeMinutes, string genre, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "deleteName" and returns the affected row count
         Task<int> deleteNameAsync(string nconst, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "deleteTitle" and returns the affected row count
         Task<int> deleteTitleAsync(string tconst, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "findName" and returns the result as a list of findNameResult
         Task<List<findNameResult>> findNameAsync(string name, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "findTitle" and returns the result as a list of findTitleResult
         Task<List<findTitleResult>> findTitleAsync(string title, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+
+        // Asynchronously executes the stored procedure "updateTitle" and returns the affected row count
         Task<int> updateTitleAsync(string tconst, string titleType, string primaryTitle, string originalTitle, bool? isAdult, short? startYear, short? endYear, int? runtimeMinutes, string genre, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
     }
 }

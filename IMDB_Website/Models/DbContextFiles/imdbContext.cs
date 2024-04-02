@@ -8,17 +8,21 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace imdb_app.Models
 {
+    // DbContext class for accessing the IMDB database
     public partial class imdbContext : DbContext
     {
+        // Default constructor
         public imdbContext()
         {
         }
 
+        // Constructor accepting DbContextOptions
         public imdbContext(DbContextOptions<imdbContext> options)
             : base(options)
         {
         }
 
+        // DbSets representing database tables
         public virtual DbSet<Actor> Actors { get; set; }
         public virtual DbSet<Director> Directors { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
@@ -29,16 +33,20 @@ namespace imdb_app.Models
         public virtual DbSet<Title> Titles { get; set; }
         public virtual DbSet<Writer> Writers { get; set; }
 
+        // Configuration for the DbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // If DbContextOptions are not configured, use default SQL Server connection string
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=IMDBv1;Integrated Security=True;Connect Timeout=30;Encrypt=False");
             }
         }
 
+        // Configuration for model creation
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuration for entities and relationships
             modelBuilder.Entity<Actor>(entity =>
             {
                 entity.ToView("Actors");
@@ -109,6 +117,7 @@ namespace imdb_app.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
+        // Partial method for additional model configuration
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
